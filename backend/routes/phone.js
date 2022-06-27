@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 const { phoneValidator } = require("../utils/validator/phone");
+const { pageValidator } = require("../utils/validator/page");
 const { Validator } = require("../middleware/validator");
 const {
     addPhoneNumber,
@@ -10,7 +11,7 @@ const {
     deletePhoneNumber,
 } = require("../controllers/Phone/CRUD");
 
-router.get("/", getPhoneNumbers);
+router.get("/", pageValidator, Validator, getPhoneNumbers);
 router.post("/add", phoneValidator, Validator, addPhoneNumber);
 router.put("/update/:id", phoneValidator, Validator, updatePhoneNumber);
 router.delete("/delete/:id", deletePhoneNumber);
