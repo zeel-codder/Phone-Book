@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const phoneSchema = new mongoose.Schema({
-    name: { type: String, unique: true },
+    first_name: { type: String, required: true, unique: true },
+    last_name: { type: String, required: true, unique: true },
+    phone: { type: Number, unique: true, unique: true },
+    country_code: { type: Number },
 });
 
 const PhoneModel = mongoose.model("Phone", phoneSchema);
