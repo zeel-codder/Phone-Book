@@ -29,5 +29,44 @@ const addPhoneNumber = async (req, res) => {
     }
 };
 
+const updatePhoneNumber = async (req, res) => {
+    try {
+        let id = req.params.id;
+        let PhoneNumberData = req.body;
+
+        await PhoneModel.findOneAndUpdate({ id }, PhoneNumberData);
+
+        const updatedPhoneNumber = await PhoneModel.findById(id);
+
+        return res.status(200).send({
+            message: "Phone number updated in db",
+            data: updatedPhoneNumber,
+        });
+    } catch (error) {
+        console.log(error);
+        return res
+            .status(404)
+            .send({ message: "Unable to update phone number" });
+    }
+};
+
+const deletePhoneNumber = async (req, res) => {
+    try {
+        let id = req.params.id;
+        await PhoneModel.findByIdAndDelete(id);
+
+        return res.status(200).send({
+            message: "Phone number deleted in db",
+        });
+    } catch (error) {
+        console.log(error);
+        return res
+            .status(404)
+            .send({ message: "Unable to delete phone number" });
+    }
+};
+
 exports.addPhoneNumber = addPhoneNumber;
 exports.getPhoneNumbers = getPhoneNumbers;
+exports.updatePhoneNumber = updatePhoneNumber;
+exports.deletePhoneNumber = deletePhoneNumber;
