@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //routers
-app.use("/phone", phoneRouter);
+app.use("/api/phone", phoneRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
