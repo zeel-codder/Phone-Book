@@ -3,6 +3,8 @@ var express = require("express");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+var cors = require("cors");
+
 require("./db/connect");
 
 var phoneRouter = require("./routes/phone");
@@ -10,6 +12,7 @@ var app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import codes from 'country-calling-code';
 
-const PhoneNumberForm = () => {
+const PhoneNumberForm = ({ closeForm, isEditForm }) => {
     return (
         <div className="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden absolute top-5">
             <div className="px-4 py-8 sm:px-10">
@@ -53,10 +53,10 @@ const PhoneNumberForm = () => {
                         <div className="flex flex-col gap-4">
                             <span className="block w-full rounded-md shadow-sm">
                                 <button type="button" className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md  rounded-lg ">
-                                    Search
+                                    Save
                                 </button>
                             </span>
-                            <span className="block w-full rounded-md shadow-sm">
+                            <span className="block w-full rounded-md shadow-sm" onClick={closeForm}>
                                 <button type="button" className="py-2 px-4  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md  rounded-lg ">
                                     Close
                                 </button>

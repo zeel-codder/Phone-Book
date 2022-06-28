@@ -26,6 +26,15 @@ const getPhoneNumbers = async (req, res) => {
             parseInt(page),
             parseInt(item_per_page)
         );
+
+        if (pageInfo.page == -1) {
+            return res.status(200).send({
+                message: "Page number in not vaild",
+                page: {},
+                data: [],
+            });
+        }
+
         const list = await PhoneModel.find(search_query)
             .sort({ createdAt: -1 })
             .skip(pageInfo.skip)
@@ -52,7 +61,9 @@ const addPhoneNumber = async (req, res) => {
         const newPhoneNumber = new PhoneModel(PhoneNumberData);
         await newPhoneNumber.save(async (err) => {
             if (err) {
-                return res.status(404).send({ message: err });
+                return res.status(404).send({
+                    message: err.message?.keyValue || "Something went wrong",
+                });
             }
 
             return res
@@ -69,7 +80,18 @@ const updatePhoneNumber = async (req, res) => {
         let id = req.params.id;
         let PhoneNumberData = req.body;
 
-        await PhoneModel.findOneAndUpdate({ id }, PhoneNumberData);
+        await PhoneModel.findOneAndUpdate(
+            { id },
+            PhoneNumberData,
+            async (err) => {
+                if (err) {
+                    return res.status(404).send({
+                        message:
+                            err.message?.keyValue || "Something went wrong",
+                    });
+                }
+            }
+        );
 
         const updatedPhoneNumber = await PhoneModel.findById(id);
 

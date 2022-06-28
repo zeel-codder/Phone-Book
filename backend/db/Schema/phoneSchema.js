@@ -14,7 +14,7 @@ const phoneSchema = new mongoose.Schema(
                 message: (val) => `${val.value} has to be 10 digits`,
             },
         },
-        phone_country_code: { type: Number },
+        country_code: { type: Number },
     },
     { timestamps: true }
 );

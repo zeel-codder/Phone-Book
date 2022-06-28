@@ -16,8 +16,12 @@ const getPageNumberData = (total, page_ask = 1, item_per_page_ask = 20) => {
         (total % item_per_page_ask == 0 ? 0 : 1);
 
     console.log(total_page);
-    if (page_ask >= total_page) {
-        res.page = total_page;
+
+    if (page_ask > total_page) {
+        res.page = -1;
+    }
+
+    if (page_ask == total_page) {
         res.item_per_page =
             total % item_per_page_ask == 0
                 ? item_per_page_ask
