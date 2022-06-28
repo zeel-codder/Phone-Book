@@ -13,7 +13,7 @@ const {
 
 router.get("/", pageValidator, Validator, getPhoneNumbers);
 router.post("/add", phoneValidator, Validator, addPhoneNumber);
-router.put("/update/:id", phoneValidator, Validator, updatePhoneNumber);
+router.post("/update/:id", phoneValidator, Validator, updatePhoneNumber);
 router.delete("/delete/:id", deletePhoneNumber);
 
 module.exports = router;

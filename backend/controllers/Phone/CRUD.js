@@ -8,7 +8,7 @@ const getPhoneNumbers = async (req, res) => {
         let search_query = {};
 
         if (query) {
-            query = {
+            search_query = {
                 $or: [
                     {
                         first_name: { $regex: query, $options: "i" },
@@ -20,7 +20,7 @@ const getPhoneNumbers = async (req, res) => {
             };
         }
 
-        const total = await PhoneModel.countDocuments({});
+        const total = await PhoneModel.countDocuments(search_query);
         const pageInfo = getPageNumberData(
             total,
             parseInt(page),
@@ -80,20 +80,13 @@ const updatePhoneNumber = async (req, res) => {
         let id = req.params.id;
         let PhoneNumberData = req.body;
 
-        await PhoneModel.findOneAndUpdate(
-            { id },
-            PhoneNumberData,
-            async (err) => {
-                if (err) {
-                    return res.status(404).send({
-                        message:
-                            err.message?.keyValue || "Something went wrong",
-                    });
-                }
-            }
-        );
+        await PhoneModel.findOneAndUpdate({ id }, PhoneNumberData);
 
         const updatedPhoneNumber = await PhoneModel.findById(id);
+
+        if (updatedPhoneNumber == null) {
+            return res.status(404).send({ message: "In vaild Id" });
+        }
 
         return res.status(200).send({
             message: "Phone number updated in db",

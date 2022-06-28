@@ -11,6 +11,7 @@ const Validator = async (req, res, next) => {
         next();
     } catch (err) {
         const message = JSON.parse(err.message)[0].msg;
+        console.log(err);
         return res.status(500).send({ message });
         // console.log(err);
     }

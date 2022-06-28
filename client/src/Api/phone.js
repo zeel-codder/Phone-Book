@@ -29,7 +29,7 @@ const updatePhoneNumber = ({
     phone_number,
     country_code,
 }) =>
-    Api.put("/phone/update/" + id, {
+    Api.post("/phone/update/" + id, {
         id,
         first_name,
         last_name,

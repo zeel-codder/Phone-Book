@@ -4,7 +4,7 @@ import { MdDelete } from "react-icons/md"
 import { FiEdit2 } from "react-icons/fi"
 import { deletePhoneNumber } from '../Api/phone'
 
-const PhoneCard = ({ _id, openForm, first_name, last_name, country_code, phone_number, FetchData }) => {
+const PhoneCard = ({ _id, openForm, first_name, last_name, country_code, phone_number, index }) => {
 
 
     const deletePhoneNumbers = () => {
@@ -14,34 +14,35 @@ const PhoneCard = ({ _id, openForm, first_name, last_name, country_code, phone_n
         }).catch((err) => {
             console.log(err)
         })
-
     }
 
+
     return (
-        <div class="shadow-lg rounded-2xl bg-white dark:bg-gray-800 p-4 flex justify-between">
-            <div class="flex-row gap-4 flex justify-center items-center">
-                <div class="flex-shrink-0">
+        <div className="shadow-lg rounded-2xl bg-white dark:bg-gray-800 p-4 flex justify-between"
+        >
+            <div className="flex-row gap-4 flex justify-center items-center">
+                <div className="flex-shrink-0">
                     <BsTelephoneOutbound></BsTelephoneOutbound>
                 </div>
-                <div class=" flex flex-col">
-                    <span class="text-gray-600 dark:text-white text-lg font-medium">
+                <div className=" flex flex-col">
+                    <span className="text-gray-600 dark:text-white text-lg font-medium">
                         {first_name} {last_name}
                     </span>
-                    <span class="text-gray-400 text-xs">
+                    <span className="text-gray-400 text-xs">
                         +{country_code} {phone_number}
                     </span>
                 </div>
             </div>
-            <div class="flex gap-2">
-                <button type="button" class="py-1 px-2  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none  rounded-lg "
+            <div className="flex gap-2">
+                <button type="button" className="py-1 px-2  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none  rounded-lg "
                     onClick={() => {
-                        openForm(true)
+                        openForm(true, index)
                     }}
 
                 >
                     <FiEdit2 className="text-white" size={18}></FiEdit2>
                 </button>
-                <button type="button" class="py-1 px-2  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none  rounded-lg "
+                <button type="button" className="py-1 px-2  bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none  rounded-lg "
                     onClick={deletePhoneNumbers}
                 >
                     <MdDelete className="text-white" size={18}></MdDelete>
