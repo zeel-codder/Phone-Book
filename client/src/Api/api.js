@@ -4,26 +4,38 @@ const Api = axios.create({
     baseURL: "http://localhost:5000/api",
 });
 
-const getProjects = ({ first_name, last_name, phone, page, item_per_page }) =>
+const getProjects = ({ query, page, item_per_page }) =>
     Api.get(
-        `/phone/?first_name=${first_name}&last_name=${last_name}&phone=${phone}&page=${page}&item_per_page=${item_per_page}`
+        `/phone/?query=${query}&page=${page}&item_per_page=${item_per_page}`
     );
 
-const createProject = ({ first_name, last_name, phone, page, country_code }) =>
+const createProject = ({
+    first_name,
+    last_name,
+    phone_number,
+    page,
+    country_code,
+}) =>
     Api.post("/phone/add", {
         first_name,
         last_name,
-        phone,
+        phone_number,
         page,
         country_code,
     });
 
-const updateProject = ({ id, first_name, last_name, phone, country_code }) =>
+const updateProject = ({
+    id,
+    first_name,
+    last_name,
+    phone_number,
+    country_code,
+}) =>
     Api.put("/phone/update" + id, {
         id,
         first_name,
         last_name,
-        phone,
+        phone_number,
         country_code,
     });
 

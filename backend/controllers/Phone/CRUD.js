@@ -3,24 +3,21 @@ const { getPageNumberData } = require("../page");
 
 const getPhoneNumbers = async (req, res) => {
     try {
-        const { first_name, last_name, phone, page, item_per_page } = req.query;
+        const { query, page, item_per_page } = req.query;
 
-        let query = { $or: [] };
+        let search_query = {};
 
-        if (first_name) {
-            query["$or"].push({
-                first_name: { $regex: first_name, $options: "i" },
-            });
-        }
-
-        if (last_name) {
-            query["$or"].push({
-                last_name: { $regex: last_name, $options: "i" },
-            });
-        }
-
-        if (query["$or"].length == 0) {
-            query = {};
+        if (query) {
+            query = {
+                $or: [
+                    {
+                        first_name: { $regex: query, $options: "i" },
+                    },
+                    {
+                        last_name: { $regex: query, $options: "i" },
+                    },
+                ],
+            };
         }
 
         const total = await PhoneModel.countDocuments({});
@@ -29,7 +26,7 @@ const getPhoneNumbers = async (req, res) => {
             parseInt(page),
             parseInt(item_per_page)
         );
-        const list = await PhoneModel.find(query)
+        const list = await PhoneModel.find(search_query)
             .sort({ createdAt: -1 })
             .skip(pageInfo.skip)
             .limit(pageInfo.limit);

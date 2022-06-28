@@ -4,7 +4,7 @@ const phoneSchema = new mongoose.Schema(
     {
         first_name: { type: String, required: true, unique: true },
         last_name: { type: String, required: true },
-        phone: {
+        phone_number: {
             type: Number,
             unique: true,
             validate: {
@@ -14,7 +14,7 @@ const phoneSchema = new mongoose.Schema(
                 message: (val) => `${val.value} has to be 10 digits`,
             },
         },
-        country_code: { type: Number },
+        phone_country_code: { type: Number },
     },
     { timestamps: true }
 );

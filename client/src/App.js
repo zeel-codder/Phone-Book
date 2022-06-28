@@ -1,5 +1,11 @@
+import PhoneNumbers from "./components/PhoneNumbers";
+
 function App() {
-    return <div className=" text-3xl">ADDED</div>;
+    return (
+        <div>
+            <PhoneNumbers></PhoneNumbers>
+        </div>
+    );
 }
 
 export default App;
